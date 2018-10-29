@@ -33,6 +33,8 @@ import android.widget.TextView;
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.charts.Chart;
 import com.github.mikephil.charting.charts.PieChart;
+import com.github.mikephil.charting.components.Legend;
+import com.github.mikephil.charting.components.LegendEntry;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -109,8 +111,8 @@ public class Login_Cliente extends AppCompatActivity implements LoaderCallbacks<
         /**
          * MERCE
          */
-        barChart=(BarChart)findViewById(R.id.BarChart);
-        pieChart=(PieChart)findViewById(R.id.PieChart);
+        barChart=(BarChart)findViewById(R.id.barChart);
+        pieChart=(PieChart)findViewById(R.id.pieChart);
     }
 
     /**
@@ -123,6 +125,21 @@ public class Login_Cliente extends AppCompatActivity implements LoaderCallbacks<
         chart.animateY(animateY);
 
         return chart;
+    }
+
+    private void legend(Chart chart){
+        Legend legend=chart.getLegend();
+        legend.setForm(Legend.LegendForm.CIRCLE);
+        legend.setHorizontalAlignment(Legend.LegendHorizontalAlignment.CENTER);
+
+        ArrayList<LegendEntry>entries=new ArrayList<>();
+        for(int i=0;i<months.length;i++){
+            LegendEntry entry=new LegendEntry();
+            entry.formColor=colors[i];
+            entry.label=months[i];
+            entries.add(entry);
+        }
+        legend.setCustom(entries);
     }
 
     private void populateAutoComplete() {
