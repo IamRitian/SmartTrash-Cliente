@@ -4,6 +4,7 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -38,6 +39,14 @@ import static android.Manifest.permission.READ_CONTACTS;
  * A login screen that offers login via email/password.
  */
 public class Login_Cliente extends AppCompatActivity implements LoaderCallbacks<Cursor> {
+    /**
+     * MERCE
+     */
+    private PieChart PieChart;
+    private BarChart BarChart;
+    private String[]months=new String[]{"Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"};
+    private int[]points= new int[]{25, 30, 38, 15, 28, 20, 10, 16, 34, 40, 23, 12};
+    private int[]colors= new int[]{Color.RED, Color.YELLOW, Color.GREEN, Color.CYAN, Color.BLUE, Color.MAGENTA, Color.RED, Color.YELLOW, Color.GREEN, Color.CYAN, Color.BLUE, Color.MAGENTA};
 
     /**
      * Id to identity READ_CONTACTS permission request.
@@ -92,6 +101,24 @@ public class Login_Cliente extends AppCompatActivity implements LoaderCallbacks<
 
         mLoginFormView = findViewById(R.id.login_form);
         mProgressView = findViewById(R.id.login_progress);
+
+        /**
+         * MERCE
+         */
+        BarChart=(BarChart)findViewById(R.id.BarChart);
+        PieChart=(PieChart)findViewById(R.id.PieChart);
+    }
+
+    /**
+     * MERCEE
+     */
+        private Chart getSameChart(Chart chart, String description, int textColor, int background, int animateY){
+        chart.getDescription().setText(description);
+        chart.getDescription().setTextSize(15);
+        chart.setBackgroundColor(background);
+        chart.animateY(animateY);
+
+        return chart;
     }
 
     private void populateAutoComplete() {
