@@ -123,7 +123,7 @@ public class Login_Cliente extends AppCompatActivity implements LoaderCallbacks<
         chart.getDescription().setTextSize(15);
         chart.setBackgroundColor(background);
         chart.animateY(animateY);
-
+        legend(chart);
         return chart;
     }
 
