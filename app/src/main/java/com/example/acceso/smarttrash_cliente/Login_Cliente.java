@@ -30,6 +30,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.github.mikephil.charting.charts.BarChart;
+import com.github.mikephil.charting.charts.Chart;
+import com.github.mikephil.charting.charts.PieChart;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -42,8 +46,8 @@ public class Login_Cliente extends AppCompatActivity implements LoaderCallbacks<
     /**
      * MERCE
      */
-    private PieChart PieChart;
-    private BarChart BarChart;
+    private PieChart pieChart;
+    private BarChart barChart;
     private String[]months=new String[]{"Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"};
     private int[]points= new int[]{25, 30, 38, 15, 28, 20, 10, 16, 34, 40, 23, 12};
     private int[]colors= new int[]{Color.RED, Color.YELLOW, Color.GREEN, Color.CYAN, Color.BLUE, Color.MAGENTA, Color.RED, Color.YELLOW, Color.GREEN, Color.CYAN, Color.BLUE, Color.MAGENTA};
@@ -105,8 +109,8 @@ public class Login_Cliente extends AppCompatActivity implements LoaderCallbacks<
         /**
          * MERCE
          */
-        BarChart=(BarChart)findViewById(R.id.BarChart);
-        PieChart=(PieChart)findViewById(R.id.PieChart);
+        barChart=(BarChart)findViewById(R.id.BarChart);
+        pieChart=(PieChart)findViewById(R.id.PieChart);
     }
 
     /**

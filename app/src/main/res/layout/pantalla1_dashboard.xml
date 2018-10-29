@@ -25,18 +25,20 @@
         <android.support.design.widget.TabItem
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="SOLICITUD" />
+            android:text="SOLICITUDES" />
 
     </android.support.design.widget.TabLayout>
+
 <com.github.mikephil.charting.charts.PieChart
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_weight="1"
-    android:id="@+id/PieChart"/>
+    android:id="@+id/pieChart"/>
 
 <com.github.mikephil.charting.charts.BarChart
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_weight="1"
-    android:id="@+id/BarChart"/>
+    android:id="@+id/barChart"/>
+
 </LinearLayout>
