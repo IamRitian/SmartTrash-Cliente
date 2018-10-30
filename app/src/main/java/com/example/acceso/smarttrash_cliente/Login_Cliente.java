@@ -35,6 +35,11 @@ import com.github.mikephil.charting.charts.Chart;
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.components.Legend;
 import com.github.mikephil.charting.components.LegendEntry;
+import com.github.mikephil.charting.components.XAxis;
+import com.github.mikephil.charting.components.YAxis;
+import com.github.mikephil.charting.data.BarEntry;
+import com.github.mikephil.charting.data.PieEntry;
+import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -140,6 +145,45 @@ public class Login_Cliente extends AppCompatActivity implements LoaderCallbacks<
             entries.add(entry);
         }
         legend.setCustom(entries);
+    }
+
+    private ArrayList<BarEntry>getBarEntries(){
+        ArrayList<BarEntry>entries=new ArrayList<>();
+        for(int i=0;i<points.length;i++)
+            entries.add(new BarEntry(i,points[i]));
+        return entries;
+    }
+
+    private ArrayList<PieEntry>getPieEntries(){
+        ArrayList<PieEntry>entries=new ArrayList<>();
+        for(int i=0;i<points.length;i++)
+            entries.add(new PieEntry(points[i]));
+        return entries;
+    }
+
+    private void axisX(XAxis axis){
+        axis.setGranularityEnabled(true);
+        axis.setPosition(XAxis.XAxisPosition.BOTTOM);
+        axis.setValueFormatter(new IndexAxisValueFormatter(months));
+    }
+
+    private void axisLeft(YAxis axis){
+        axis.setSpaceTop(45);
+        axis.setAxisMinimum(0);
+    }
+
+    private void axisRight(YAxis axis){
+        axis.setEnabled(false);
+    }
+
+    public void createCharts(){
+            barChart=(BarChart)getSameChart(barChart, "Series", Color.BLACK, Color.WHITE, 2000);
+            barChart.setDrawGridBackground(true);
+            barChart.setDrawBarShadow(true);
+
+            axisX(barChart.getXAxis());
+            axisLeft(barChart.getAxisLeft());
+            axisRight(barChart.getAxisRight());
     }
 
     private void populateAutoComplete() {
