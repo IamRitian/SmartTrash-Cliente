@@ -51,15 +51,6 @@ import static android.Manifest.permission.READ_CONTACTS;
  */
 public class Login_Cliente extends AppCompatActivity implements LoaderCallbacks<Cursor> {
     /**
-     * MERCE
-     */
-    private PieChart pieChart;
-    private BarChart barChart;
-    private String[]months=new String[]{"Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"};
-    private int[]points= new int[]{25, 30, 38, 15, 28, 20, 10, 16, 34, 40, 23, 12};
-    private int[]colors= new int[]{Color.RED, Color.YELLOW, Color.GREEN, Color.CYAN, Color.BLUE, Color.MAGENTA, Color.RED, Color.YELLOW, Color.GREEN, Color.CYAN, Color.BLUE, Color.MAGENTA};
-
-    /**
      * Id to identity READ_CONTACTS permission request.
      */
     private static final int REQUEST_READ_CONTACTS = 0;
@@ -112,78 +103,6 @@ public class Login_Cliente extends AppCompatActivity implements LoaderCallbacks<
 
         mLoginFormView = findViewById(R.id.login_form);
         mProgressView = findViewById(R.id.login_progress);
-
-        /**
-         * MERCE
-         */
-        barChart=(BarChart)findViewById(R.id.barChart);
-        pieChart=(PieChart)findViewById(R.id.pieChart);
-    }
-
-    /**
-     * MERCEE
-     */
-        private Chart getSameChart(Chart chart, String description, int textColor, int background, int animateY){
-        chart.getDescription().setText(description);
-        chart.getDescription().setTextSize(15);
-        chart.setBackgroundColor(background);
-        chart.animateY(animateY);
-        legend(chart);
-        return chart;
-    }
-
-    private void legend(Chart chart){
-        Legend legend=chart.getLegend();
-        legend.setForm(Legend.LegendForm.CIRCLE);
-        legend.setHorizontalAlignment(Legend.LegendHorizontalAlignment.CENTER);
-
-        ArrayList<LegendEntry>entries=new ArrayList<>();
-        for(int i=0;i<months.length;i++){
-            LegendEntry entry=new LegendEntry();
-            entry.formColor=colors[i];
-            entry.label=months[i];
-            entries.add(entry);
-        }
-        legend.setCustom(entries);
-    }
-
-    private ArrayList<BarEntry>getBarEntries(){
-        ArrayList<BarEntry>entries=new ArrayList<>();
-        for(int i=0;i<points.length;i++)
-            entries.add(new BarEntry(i,points[i]));
-        return entries;
-    }
-
-    private ArrayList<PieEntry>getPieEntries(){
-        ArrayList<PieEntry>entries=new ArrayList<>();
-        for(int i=0;i<points.length;i++)
-            entries.add(new PieEntry(points[i]));
-        return entries;
-    }
-
-    private void axisX(XAxis axis){
-        axis.setGranularityEnabled(true);
-        axis.setPosition(XAxis.XAxisPosition.BOTTOM);
-        axis.setValueFormatter(new IndexAxisValueFormatter(months));
-    }
-
-    private void axisLeft(YAxis axis){
-        axis.setSpaceTop(45);
-        axis.setAxisMinimum(0);
-    }
-
-    private void axisRight(YAxis axis){
-        axis.setEnabled(false);
-    }
-
-    public void createCharts(){
-            barChart=(BarChart)getSameChart(barChart, "Series", Color.BLACK, Color.WHITE, 2000);
-            barChart.setDrawGridBackground(true);
-            barChart.setDrawBarShadow(true);
-
-            axisX(barChart.getXAxis());
-            axisLeft(barChart.getAxisLeft());
-            axisRight(barChart.getAxisRight());
     }
 
     private void populateAutoComplete() {
