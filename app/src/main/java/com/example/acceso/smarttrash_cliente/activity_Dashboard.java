@@ -40,6 +40,8 @@ public class activity_Dashboard extends AppCompatActivity {
 
         barChart=(BarChart)findViewById(R.id.barChart);
         pieChart=(PieChart)findViewById(R.id.pieChart);
+
+        createCharts();
     }
 
     /**
@@ -102,6 +104,8 @@ public class activity_Dashboard extends AppCompatActivity {
         barChart=(BarChart)getSameChart(barChart, "Series", Color.BLACK, Color.WHITE, 2000);
         barChart.setDrawGridBackground(true);
         barChart.setDrawBarShadow(true);
+        barChart.setData(getBarData());
+        barChart.invalidate();
 
         axisX(barChart.getXAxis());
         axisLeft(barChart.getAxisLeft());
@@ -111,6 +115,8 @@ public class activity_Dashboard extends AppCompatActivity {
         pieChart.setHoleRadius(10);
         pieChart.setTransparentCircleRadius(12);
         pieChart.setDrawHoleEnabled(false);
+        pieChart.setData(getPieData());
+        pieChart.invalidate();
     }
 
     private DataSet getData(DataSet dataSet){
