@@ -29,9 +29,9 @@ public class activity_Dashboard extends AppCompatActivity {
      */
     private PieChart pieChart;
     private BarChart barChart;
-    private String[]months=new String[]{"Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"};
+    private String[]months=new String[]{"ENE", "FEB", "MAR", "ABR", "MAY", "JUN", "JUL", "AGO", "SEP", "OCT", "NOV", "DIC"};
     private int[]points= new int[]{25, 30, 38, 15, 28, 20, 10, 16, 34, 40, 23, 12};
-    private int[]colors= new int[]{Color.RED, Color.YELLOW, Color.GREEN, Color.CYAN, Color.BLUE, Color.MAGENTA, Color.RED, Color.YELLOW, Color.GREEN, Color.CYAN, Color.BLUE, Color.MAGENTA};
+    private int[]colors= new int[]{Color.rgb(27, 94, 32), Color.rgb(46, 125, 50), Color.rgb(130, 119, 23), Color.rgb(158, 157, 36), Color.rgb(214, 191, 10), Color.rgb(255, 222, 38), Color.rgb(249, 168, 37), Color.rgb(245, 127, 23), Color.rgb(216, 67, 21), Color.rgb(191, 54, 12), Color.rgb(141, 66, 18), Color.rgb(77, 82, 26)};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,8 +48,7 @@ public class activity_Dashboard extends AppCompatActivity {
      * MERCEE
      */
     private Chart getSameChart(Chart chart, String description, int textColor, int background, int animateY){
-        chart.getDescription().setText(description);
-        chart.getDescription().setTextSize(15);
+        chart.getDescription().setText("");
         chart.setBackgroundColor(background);
         chart.animateY(animateY);
         legend(chart);
@@ -58,8 +57,9 @@ public class activity_Dashboard extends AppCompatActivity {
 
     private void legend(Chart chart){
         Legend legend=chart.getLegend();
-        legend.setForm(Legend.LegendForm.CIRCLE);
+        legend.setForm(Legend.LegendForm.SQUARE);
         legend.setHorizontalAlignment(Legend.LegendHorizontalAlignment.CENTER);
+        legend.setFormSize(6);
 
         ArrayList<LegendEntry> entries=new ArrayList<>();
         for(int i=0;i<months.length;i++){
@@ -92,7 +92,7 @@ public class activity_Dashboard extends AppCompatActivity {
     }
 
     private void axisLeft(YAxis axis){
-        axis.setSpaceTop(45);
+        axis.setSpaceTop(10);
         axis.setAxisMinimum(0);
     }
 
@@ -106,23 +106,25 @@ public class activity_Dashboard extends AppCompatActivity {
         barChart.setDrawBarShadow(true);
         barChart.setData(getBarData());
         barChart.invalidate();
+        barChart.getLegend().setEnabled(false);
 
         axisX(barChart.getXAxis());
         axisLeft(barChart.getAxisLeft());
         axisRight(barChart.getAxisRight());
 
         pieChart=(PieChart)getSameChart(pieChart, "Puntos", Color.GRAY, Color.WHITE, 2000);
-        pieChart.setHoleRadius(10);
+        pieChart.setHoleRadius(40);
         pieChart.setTransparentCircleRadius(12);
-        pieChart.setDrawHoleEnabled(false);
+        //pieChart.setDrawHoleEnabled(false);
         pieChart.setData(getPieData());
         pieChart.invalidate();
+        pieChart.getLegend().setTextSize(5);
     }
 
     private DataSet getData(DataSet dataSet){
     dataSet.setColors(colors);
     dataSet.setValueTextColor(Color.WHITE);
-    dataSet.setValueTextSize(10);
+    dataSet.setValueTextSize(6);
     return dataSet;
     }
 
