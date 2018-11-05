@@ -3,6 +3,7 @@ package com.example.acceso.smarttrash_cliente;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.support.annotation.NonNull;
@@ -97,7 +98,9 @@ public class Login_Cliente extends AppCompatActivity implements LoaderCallbacks<
         mEmailSignInButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-                attemptLogin();
+                //attemptLogin();
+                Intent dashboard = new Intent(Login_Cliente.this, activity_Dashboard.class);
+                startActivity(dashboard);
             }
         });
 
