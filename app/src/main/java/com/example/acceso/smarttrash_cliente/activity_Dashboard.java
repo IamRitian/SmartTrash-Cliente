@@ -41,7 +41,7 @@ public class activity_Dashboard extends AppCompatActivity {
         barChart=(BarChart)findViewById(R.id.barChart);
         pieChart=(PieChart)findViewById(R.id.pieChart);
 
-        
+        createCharts();
     }
 
     /**
