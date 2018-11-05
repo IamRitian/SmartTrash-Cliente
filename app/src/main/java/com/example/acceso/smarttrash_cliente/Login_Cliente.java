@@ -3,6 +3,7 @@ package com.example.acceso.smarttrash_cliente;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.support.annotation.NonNull;
@@ -35,11 +36,6 @@ import com.github.mikephil.charting.charts.Chart;
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.components.Legend;
 import com.github.mikephil.charting.components.LegendEntry;
-import com.github.mikephil.charting.components.XAxis;
-import com.github.mikephil.charting.components.YAxis;
-import com.github.mikephil.charting.data.BarEntry;
-import com.github.mikephil.charting.data.PieEntry;
-import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -50,6 +46,15 @@ import static android.Manifest.permission.READ_CONTACTS;
  * A login screen that offers login via email/password.
  */
 public class Login_Cliente extends AppCompatActivity implements LoaderCallbacks<Cursor> {
+    /**
+     * MERCE
+     */
+    private PieChart pieChart;
+    private BarChart barChart;
+    private String[]months=new String[]{"Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"};
+    private int[]points= new int[]{25, 30, 38, 15, 28, 20, 10, 16, 34, 40, 23, 12};
+    private int[]colors= new int[]{Color.RED, Color.YELLOW, Color.GREEN, Color.CYAN, Color.BLUE, Color.MAGENTA, Color.RED, Color.YELLOW, Color.GREEN, Color.CYAN, Color.BLUE, Color.MAGENTA};
+
     /**
      * Id to identity READ_CONTACTS permission request.
      */
@@ -97,12 +102,47 @@ public class Login_Cliente extends AppCompatActivity implements LoaderCallbacks<
         mEmailSignInButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-                attemptLogin();
+                //attemptLogin();
+                Intent dashboard = new Intent(Login_Cliente.this, Dashboard.class);
+                startActivity(dashboard);
             }
         });
 
         mLoginFormView = findViewById(R.id.login_form);
         mProgressView = findViewById(R.id.login_progress);
+
+        /**
+         * MERCE
+         */
+        barChart=(BarChart)findViewById(R.id.barChart);
+        pieChart=(PieChart)findViewById(R.id.pieChart);
+    }
+
+    /**
+     * MERCEE
+     */
+        private Chart getSameChart(Chart chart, String description, int textColor, int background, int animateY){
+        chart.getDescription().setText(description);
+        chart.getDescription().setTextSize(15);
+        chart.setBackgroundColor(background);
+        chart.animateY(animateY);
+        legend(chart);
+        return chart;
+    }
+
+    private void legend(Chart chart){
+        Legend legend=chart.getLegend();
+        legend.setForm(Legend.LegendForm.CIRCLE);
+        legend.setHorizontalAlignment(Legend.LegendHorizontalAlignment.CENTER);
+
+        ArrayList<LegendEntry>entries=new ArrayList<>();
+        for(int i=0;i<months.length;i++){
+            LegendEntry entry=new LegendEntry();
+            entry.formColor=colors[i];
+            entry.label=months[i];
+            entries.add(entry);
+        }
+        legend.setCustom(entries);
     }
 
     private void populateAutoComplete() {
