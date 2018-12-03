@@ -3,6 +3,7 @@ package com.example.acceso.smarttrash_cliente;
 
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -40,10 +41,21 @@ public class Estadisticas extends Fragment {
 
     private PieChart pieChart;
     private BarChart barChart;
-    private String[]months=new String[]{"Organico","Inorganico","Sanitario"};
-    private int[]points= new int[]{25, 30, 38};
-    private int[]colors= new int[]{Color.rgb(27, 94, 32), Color.rgb(46, 125, 50), Color.rgb(130, 119, 23)};
+    private String[]months; //=new String[]{"Organico","Inorganico","Sanitario"};
+    private int[]points ; //= new int[]{25, 30, 38};
+    private int[]colors; //= new int[]{Color.rgb(27, 94, 32), Color.rgb(46, 125, 50), Color.rgb(130, 119, 23)};
 //, Color.rgb(158, 157, 36), Color.rgb(214, 191, 10), Color.rgb(255, 222, 38), Color.rgb(249, 168, 37), Color.rgb(245, 127, 23), Color.rgb(216, 67, 21), Color.rgb(191, 54, 12), Color.rgb(141, 66, 18), Color.rgb(77, 82, 26)
+
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        months = new String[]{"Organico","Inorganico","Sanitario"};
+        points = new int[]{25, 30, 38};
+        colors = new int[]{Color.rgb(27, 94, 32), Color.rgb(46, 125, 50), Color.rgb(130, 119, 23)};
+
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

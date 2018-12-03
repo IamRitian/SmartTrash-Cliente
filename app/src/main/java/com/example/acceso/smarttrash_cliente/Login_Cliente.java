@@ -25,8 +25,10 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.Toolbar;
 
 import com.example.acceso.smarttrash_cliente.Objetos.FirebaseReferencia;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -52,84 +54,77 @@ import static android.Manifest.permission.READ_CONTACTS;
 public class Login_Cliente extends AppCompatActivity {
 
 
-
-
-
-
     private EditText txtPass, txtCorreo;
-    private Button btnConect;
+    private Button btnLogin;
+    private ProgressBar progressBar;
 
-    private FirebaseAuth firebaseAuth;
-    private FirebaseAuth.AuthStateListener mAuthListener;
+    private FirebaseAuth auth;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login__cliente);
 
-        FirebaseDatabase DB = FirebaseDatabase.getInstance();
-        //DatabaseReference MyRef = DB.getReference(FirebaseReferencia.BD_Referencia);
+//        if (auth.getCurrentUser() != null) {
+//            startActivity(new Intent(Login_Cliente.this, activity_Dashboard.class));
+//            finish();
+//        }else {
+//            Toast.makeText(getApplicationContext(), "Error al iniciar app", Toast.LENGTH_SHORT).show();
+//
+//        }
 
-        txtPass = (EditText) findViewById(R.id.password);
+
         txtCorreo = (EditText) findViewById(R.id.email);
+        txtPass = (EditText) findViewById(R.id.password);
+        progressBar = (ProgressBar) findViewById(R.id.progressBar);
+        btnLogin = (Button) findViewById(R.id.btnlogin);
 
-        btnConect = (Button) findViewById(R.id.btnlogin);
 
-        firebaseAuth = FirebaseAuth.getInstance();
+        auth = FirebaseAuth.getInstance();
 
-//        mAuthListener = new FirebaseAuth.AuthStateListener() {
-//            @Override
-//            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-//                FirebaseUser user = firebaseAuth.getCurrentUser();
-//                if (user != null){
-//                    Toast.makeText(Login_Cliente.this, "Sesion Iniciado", Toast.LENGTH_SHORT).show();
-//                }else {
-//                    Toast.makeText(Login_Cliente.this, "Sesion cerrado", Toast.LENGTH_SHORT).show();
-//                }
-//            }
-//        };
 
-        Button mEmailSignInButton = (Button) findViewById(R.id.btnlogin);
-        mEmailSignInButton.setOnClickListener(new OnClickListener() {
+        btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
+            public void onClick(View v) {
+                String email = txtCorreo.getText().toString();
+                final String password = txtPass.getText().toString();
 
-                Intent pantalla = new Intent(Login_Cliente.this, activity_Dashboard.class);
-                startActivity(pantalla);
-            }
-        });
-
-    }
-
-    private void iniciarSesion (View view){
-        String Email = txtCorreo.getText().toString();
-        String Pass = txtPass.getText().toString();
-        firebaseAuth.signInWithEmailAndPassword(Email, Pass).addOnCompleteListener(this, new OnCompleteListener<AuthResult>(){
-
-            @Override
-            public void onComplete(@NonNull Task task) {
-                if (!task.isSuccessful()){
-                    Toast.makeText(Login_Cliente.this, "Error", Toast.LENGTH_SHORT).show();
-                }else {
-                    Toast.makeText(Login_Cliente.this, "", Toast.LENGTH_SHORT).show();
+                if (TextUtils.isEmpty(email)) {
+                    Toast.makeText(getApplicationContext(), "Enter email address!", Toast.LENGTH_SHORT).show();
+                    return;
                 }
+
+                if (TextUtils.isEmpty(password)) {
+                    Toast.makeText(getApplicationContext(), "Enter password!", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                progressBar.setVisibility(View.VISIBLE);
+
+
+                auth.signInWithEmailAndPassword(email, password)
+                        .addOnCompleteListener(Login_Cliente.this, new OnCompleteListener<AuthResult>() {
+                            @Override
+                            public void onComplete(@NonNull Task<AuthResult> task) {
+
+                                progressBar.setVisibility(View.GONE);
+                                if (!task.isSuccessful()) {
+
+                                    if (password.length() < 6) {
+                                        txtCorreo.setError(getString(R.string.minimum_password));
+                                    } else {
+                                        Toast.makeText(Login_Cliente.this, getString(R.string.auth_failed), Toast.LENGTH_LONG).show();
+                                    }
+                                } else {
+                                    Intent intent = new Intent(Login_Cliente.this, activity_Dashboard.class);
+                                    startActivity(intent);
+                                    finish();
+                                }
+                            }
+                        });
             }
         });
-    }
-
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-        firebaseAuth.addAuthStateListener(mAuthListener);
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-        if (mAuthListener != null){
-            FirebaseAuth.getInstance().removeAuthStateListener(mAuthListener);
-        }
     }
 }
 
