@@ -44,7 +44,7 @@ public class tab_solicitudes extends Fragment {
         txtFechaHoy = (EditText) rootView.findViewById(R.id.txtFechaActual);
 
         btnSoli = (Button) rootView.findViewById(R.id.btnSolicitar);
-        DBref = FirebaseDatabase.getInstance().getReference("cliente");
+        DBref = FirebaseDatabase.getInstance().getReference();
 
 
         btnSoli.setOnClickListener(new View.OnClickListener() {
@@ -77,12 +77,12 @@ public class tab_solicitudes extends Fragment {
 
         if (!TextUtils.isEmpty(fecha)) {
 
-            String id = DBref.push().getKey();
+            //String id = DBref.push().getKey();
 
 
 
 
-            DBref.child(id).setValue(fecha);
+            DBref.child("Notificaciones").child("Flex").setValue(true);
 
 
             txtCal.setText("");
