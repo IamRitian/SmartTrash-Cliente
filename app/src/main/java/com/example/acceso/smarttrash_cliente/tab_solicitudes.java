@@ -35,11 +35,17 @@ public class tab_solicitudes extends Fragment {
 
     //private List<> artists;
 
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
 
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View rootView = inflater.inflate(R.layout.tab_solicitudes, container, false);
+
+        txtCal = (EditText) rootView.findViewById(R.id.txtProxVisit);
+        txtFechaHoy = (EditText) rootView.findViewById(R.id.txtFechaActual);
+
+        btnSoli = (Button) rootView.findViewById(R.id.btnSolicitar);
         DBref = FirebaseDatabase.getInstance().getReference("cliente");
+
 
         btnSoli.setOnClickListener(new View.OnClickListener() {
 
@@ -49,14 +55,6 @@ public class tab_solicitudes extends Fragment {
 
             }
         });
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.tab_solicitudes, container, false);
-
-        txtCal = (EditText) rootView.findViewById(R.id.txtProxVisit);
-        txtFechaHoy = (EditText) rootView.findViewById(R.id.txtFechaActual);
         FechaHoy();
         return rootView;
 
