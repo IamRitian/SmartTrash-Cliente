@@ -66,15 +66,6 @@ public class Login_Cliente extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login__cliente);
 
-//        if (auth.getCurrentUser() != null) {
-//            startActivity(new Intent(Login_Cliente.this, activity_Dashboard.class));
-//            finish();
-//        }else {
-//            Toast.makeText(getApplicationContext(), "Error al iniciar app", Toast.LENGTH_SHORT).show();
-//
-//        }
-
-
         txtCorreo = (EditText) findViewById(R.id.email);
         txtPass = (EditText) findViewById(R.id.password);
         progressBar = (ProgressBar) findViewById(R.id.progressBar);

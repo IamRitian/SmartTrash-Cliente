@@ -124,7 +124,7 @@ public class Estadisticas extends Fragment {
         axis.setEnabled(false);
     }
 
-    public void createCharts(){
+    private void createCharts(){
         barChart=(BarChart)getSameChart(barChart, "Series", Color.BLACK, Color.WHITE, 2000);
         barChart.setDrawGridBackground(true);
         barChart.setDrawBarShadow(true);

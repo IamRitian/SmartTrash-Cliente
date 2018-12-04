@@ -39,21 +39,21 @@ public class menu_dashboard extends AppCompatActivity {
 
                 return true;
             case R.id.action_logout:
-                signOut();
-//                Intent cerrar=new Intent(menu_dashboard.this, Login_Cliente.class);
-//                stopService(cerrar);
+                auth.signOut();
+                Intent cerrar=new Intent(this, Login_Cliente.class);
+                startActivity(cerrar);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
     }
 
-    private void signOut() {
-        auth.signOut();
-        Intent intent = new Intent(menu_dashboard.this, Login_Cliente.class);
-        startActivity(intent);
-        Toast.makeText(getApplicationContext(), "Has cerrado sesion", Toast.LENGTH_SHORT).show();
-        //updateUI(null);
-    }
+//    private void signOut() {
+//        auth.signOut();
+//        Intent intent = new Intent(menu_dashboard.this, Login_Cliente.class);
+//        startActivity(intent);
+//        Toast.makeText(getApplicationContext(), "Has cerrado sesion", Toast.LENGTH_SHORT).show();
+//        //updateUI(null);
+//    }
 
 }
