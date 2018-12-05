@@ -5,7 +5,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 
@@ -40,7 +39,7 @@ public class menu_dashboard extends AppCompatActivity {
                 return true;
             case R.id.action_logout:
                 auth.signOut();
-                Intent cerrar=new Intent(this, Login_Cliente.class);
+                Intent cerrar = new Intent(this, Login_Cliente.class);
                 startActivity(cerrar);
                 return true;
             default:

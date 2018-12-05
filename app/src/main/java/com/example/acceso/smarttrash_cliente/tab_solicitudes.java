@@ -80,15 +80,13 @@ public class tab_solicitudes extends Fragment {
             //String id = DBref.push().getKey();
 
 
-
-
             DBref.child("Notificaciones").child("Flex").setValue(true);
 
 
             txtCal.setText("");
 
             //displaying a success toast
-            //Toast.makeText(this, "Fecha agregada", Toast.LENGTH_LONG).show();
+            Toast.makeText(getContext(), "Solicitud Realizado", Toast.LENGTH_LONG).show();
         } else {
             //if the value is not given displaying a toast
             //Toast.makeText(this, "Por favor ingresa la fecha", Toast.LENGTH_LONG).show();
